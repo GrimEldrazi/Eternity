@@ -1,0 +1,15 @@
+{
+  "name": "eternity",
+  "colorID": [0, 0, 255],
+  "mass": 5.97E+24,
+  "radius": 6.99E+07,
+  "hasRings": true,
+  "elements": {
+    "rotationPeriod": 12000,
+    "isTidalLocked": false,
+    "latitude": 45,
+    "surfaceGravity": 10,
+    "airDensity": 20,
+    "hasOxygen": true
+  }
+}
