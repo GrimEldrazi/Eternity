@@ -5,9 +5,7 @@ import net.grimm.eternity.common.util.EMath;
 import net.minecraft.util.Mth;
 import org.joml.Vector3d;
 
-import java.util.function.Function;
-
-public class KeplerianOrbit implements Orbit {
+public class KeplerianOrbitTEST implements OrbitTEST {
 
     private Celestial centralBody;
     private double a;
@@ -17,7 +15,7 @@ public class KeplerianOrbit implements Orbit {
     private double omega;
     private double v;
 
-    public KeplerianOrbit(Celestial centralBody, double a, double e, double i, double raan, double omega, double v) {
+    public KeplerianOrbitTEST(Celestial centralBody, double a, double e, double i, double raan, double omega, double v) {
         this.centralBody = centralBody;
         this.a = a;
         this.e = e;
@@ -27,7 +25,7 @@ public class KeplerianOrbit implements Orbit {
         this.v = v;
     }
 
-    public KeplerianOrbit(KeplerianOrbit keplerianOrbit, double v) {
+    public KeplerianOrbitTEST(KeplerianOrbitTEST keplerianOrbit, double v) {
         this.centralBody = keplerianOrbit.centralBody;
         this.a = keplerianOrbit.a;
         this.e = keplerianOrbit.e;
@@ -118,7 +116,7 @@ public class KeplerianOrbit implements Orbit {
     }
 
     public void propagate(long iEpoch, long fEpoch) {
-        double t = fEpoch - iEpoch;
+        double t = -fEpoch + iEpoch;
         double m = (t * meanMotion() + meanAnom()) % Mth.TWO_PI;
         double e = EMath.newtonMethod(m, 3, x -> x - this.e * Math.sin(x) - m, x -> 1 - this.e * Math.cos(x));
         double b = this.e / (1 + Math.sqrt(1 - this.e * this.e));
@@ -129,7 +127,7 @@ public class KeplerianOrbit implements Orbit {
         propagate(0, epoch);
     }
 
-    public CartesianOrbit toCartesian() {
-        return new CartesianOrbit(centralBody, position(), velocity());
+    public CartesianOrbitTEST toCartesian() {
+        return new CartesianOrbitTEST(centralBody, position(), velocity());
     }
 }

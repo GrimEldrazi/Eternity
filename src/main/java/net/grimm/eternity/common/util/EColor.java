@@ -31,6 +31,14 @@ public class EColor {
         this.alpha = 255;
     }
 
+    public EColor(int colorInt) {
+        Color color = new Color(colorInt);
+        this.red = color.getRed();
+        this.green = color.getGreen();
+        this.blue = color.getBlue();
+        this.alpha = 255;
+    }
+
     public float getRed() {
         return red;
     }

@@ -2,7 +2,6 @@ package net.grimm.eternity.common.network.packets;
 
 import net.grimm.eternity.common.data.GlobalData;
 import net.grimm.eternity.common.network.SyncMessage;
-import net.grimm.eternity.common.util.BufHelper;
 import net.grimm.eternity.common.world.saved_data.Epoch;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -14,7 +13,7 @@ public class EpochSyncMessage extends SyncMessage<Epoch, EpochSyncMessage> {
     }
 
     public EpochSyncMessage(RegistryFriendlyByteBuf buf) {
-        super(GlobalData.decode(BufHelper.readNbt(buf), Epoch::new));
+        super(GlobalData.decode(util.readNbt(buf), Epoch::new));
     }
 
     @Override

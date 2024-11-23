@@ -3,13 +3,13 @@ package net.grimm.eternity.common.astrodynamics.orbits;
 import net.grimm.eternity.common.astrodynamics.celestials.Celestial;
 import org.joml.Vector3d;
 
-public class CartesianOrbit implements Orbit {
+public class CartesianOrbitTEST implements OrbitTEST {
 
     private Celestial centralBody;
     private Vector3d position;
     private Vector3d velocity;
 
-    public CartesianOrbit(Celestial centralBody, Vector3d position, Vector3d velocity) {
+    public CartesianOrbitTEST(Celestial centralBody, Vector3d position, Vector3d velocity) {
         this.centralBody = centralBody;
         this.position = position;
         this.velocity = velocity;
@@ -95,8 +95,8 @@ public class CartesianOrbit implements Orbit {
         velocity = velocity.add(deltaV);
     }
 
-    public KeplerianOrbit toKeplerian() {
-        return new KeplerianOrbit(centralBody, a(), e(), i(), raan(), omega(), v());
+    public KeplerianOrbitTEST toKeplerian() {
+        return new KeplerianOrbitTEST(centralBody, a(), e(), i(), raan(), omega(), v());
     }
 
 }

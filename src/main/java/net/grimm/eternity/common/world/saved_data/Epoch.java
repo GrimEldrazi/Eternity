@@ -4,6 +4,7 @@ import net.grimm.eternity.common.data.GlobalData;
 import net.grimm.eternity.common.network.packets.EpochSyncMessage;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.LevelAccessor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
@@ -51,6 +52,10 @@ public class Epoch extends GlobalData<Epoch, EpochSyncMessage> {
         tag.putLong("epoch", epoch);
         tag.putInt("delta", delta);
         return tag;
+    }
+
+    public static Epoch getInstance(LevelAccessor level) {
+        return (Epoch) GlobalData.get(level, Epoch::new);
     }
 
 }

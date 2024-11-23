@@ -3,6 +3,7 @@ package net.grimm.eternity.common.astrodynamics.celestials;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Mth;
 
 public record PlanetaryElements(long rotPeriod, boolean tidalLock, float latitude,
                                 float surfGrav, float airDens, boolean oxygen) {
@@ -15,6 +16,11 @@ public record PlanetaryElements(long rotPeriod, boolean tidalLock, float latitud
             Codec.FLOAT.fieldOf("airDensity").forGetter(PlanetaryElements::airDens),
             Codec.BOOL.fieldOf("hasOxygen").forGetter(PlanetaryElements::oxygen)
     ).apply(instance, instance.stable(PlanetaryElements::new)));
+
+    @Override
+    public float latitude() {
+        return (float) Math.toRadians(latitude);
+    }
 
     public void encode(CompoundTag tag) {
         tag.putLong("rotPeriod", rotPeriod);

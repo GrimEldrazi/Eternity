@@ -3,7 +3,6 @@ package net.grimm.eternity.common.network.packets;
 import net.grimm.eternity.common.data.DebugMode;
 import net.grimm.eternity.common.network.IPacket;
 import net.grimm.eternity.common.registry.DataAttachments;
-import net.grimm.eternity.common.util.BufHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
@@ -18,7 +17,7 @@ public class UpdateDebugPacket implements IPacket<UpdateDebugPacket> {
     }
 
     public UpdateDebugPacket(RegistryFriendlyByteBuf buf) {
-        this.tag = BufHelper.readNbt(buf);
+        this.tag = util.readNbt(buf);
     }
 
     @Override

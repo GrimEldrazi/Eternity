@@ -18,12 +18,12 @@ public record OrbitFactory(double a, double e, double i, double raan, double ome
 
     public static final OrbitFactory CENTRAL_STATIC_ORBIT_FACTORY = new OrbitFactory(0, Double.NaN, Double.NaN, Double.NaN, Double.NaN);
 
-    public KeplerianOrbit createMoonOrbit() {
-        return new KeplerianOrbit(Celestial.CELESTIALS.getPlanet(), a, e, Math.toRadians(i), Math.toRadians(raan), Math.toRadians(omega), 0);
+    public KeplerianOrbitTEST createMoonOrbit() {
+        return new KeplerianOrbitTEST(Celestial.CELESTIALS.getPlanet(), a, e, Math.toRadians(i), Math.toRadians(raan), Math.toRadians(omega), 0);
     }
 
-    public Orbit createCentralStaticOrbit() {
-        return new Orbit() {
+    public OrbitTEST createCentralStaticOrbit() {
+        return new OrbitTEST() {
             @Override
             public Celestial getCentralBody() {
                 return null;

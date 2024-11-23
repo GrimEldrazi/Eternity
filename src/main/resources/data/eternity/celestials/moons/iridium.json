@@ -2,7 +2,7 @@
   "name": "iridium",
   "colorID": [255, 0, 0],
   "mass": 8.93E+22,
-  "radius": 1.82E+08,
+  "radius": 1.82E+07,
   "elements": {
     "rotationPeriod": 0,
     "isTidalLocked": true,
@@ -12,10 +12,10 @@
     "hasOxygen": false
   },
   "orbit": {
-    "semiMajorAxis": 5E+6,
-    "eccentricity": 0.01,
-    "inclination": 20.0,
+    "semiMajorAxis": 2E+8,
+    "eccentricity": 0.0,
+    "inclination": 90.0,
     "rightAscensionOfAscNode": 0.0,
-    "argOfPeriapsis": 0.0
+    "argOfPeriapsis": 45.0
   }
 }

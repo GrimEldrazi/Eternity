@@ -4,9 +4,9 @@ import net.grimm.eternity.common.astrodynamics.celestials.Celestial;
 import net.minecraft.util.Mth;
 import org.joml.Vector3d;
 
-public interface Orbit {
+public interface OrbitTEST {
 
-    double G = 6.674E-11;
+    double G = 6.674E-11; //TODO: overhaul orbit classes
 
     default double mu() {
         return getCentralBody().getMass() * G;
@@ -21,7 +21,7 @@ public interface Orbit {
     }
 
     default void propagateIfKeplerian(long epoch) {
-        if (this instanceof KeplerianOrbit orbit) {
+        if (this instanceof KeplerianOrbitTEST orbit) {
             orbit.staticPropagation(epoch);
         }
     }

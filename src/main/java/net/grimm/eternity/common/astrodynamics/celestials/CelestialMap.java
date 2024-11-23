@@ -1,5 +1,7 @@
 package net.grimm.eternity.common.astrodynamics.celestials;
 
+import net.grimm.eternity.Eternity;
+import net.grimm.eternity.common.astrodynamics.orbits.OrbitTEST;
 import net.grimm.eternity.common.astrodynamics.orbits.OrbitFactory;
 import net.minecraft.util.Mth;
 
@@ -7,7 +9,7 @@ import java.util.*;
 
 public class CelestialMap extends HashMap<String, Celestial> {
 
-    public static final Celestial PROXY = new Moon("proxy", new ArrayList<>(Arrays.asList(0, 0, 0)), 1, 1,
+    public static final Celestial PROXY = new Moon(Eternity.MOD_ID, "proxy", new ArrayList<>(Arrays.asList(0, 0, 0)), 1, 1,
             new PlanetaryElements(1, false, 0, 1, 0, false), OrbitFactory.CENTRAL_STATIC_ORBIT_FACTORY);
 
     @Override
@@ -41,9 +43,24 @@ public class CelestialMap extends HashMap<String, Celestial> {
         return moons;
     }
 
+    public List<Celestial> asList() {
+        return new ArrayList<>(values());
+    }
+
     public List<Celestial> sortAsList() {
         List<Celestial> celestialList = new ArrayList<>(values());
         celestialList.sort((o1, o2) -> Mth.floor(o1.getOrbit().a() - o2.getOrbit().a()));
+        return celestialList;
+    }
+
+    public List<Celestial> sortByDistance(long epoch) {
+        List<Celestial> celestialList = new ArrayList<>(values());
+        celestialList.sort((o1, o2) -> {
+            OrbitTEST orbitTEST1 = o1.getOrbit();
+            OrbitTEST orbitTEST2 = o2.getOrbit();
+            orbitTEST1.propagateIfKeplerian(epoch); orbitTEST2.propagateIfKeplerian(epoch);
+            return Mth.floor(orbitTEST1.position().distance(orbitTEST2.position()));
+        });
         return celestialList;
     }
 

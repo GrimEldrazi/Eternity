@@ -1,6 +1,7 @@
 package net.grimm.eternity.common.network;
 
 import net.grimm.eternity.Eternity;
+import net.grimm.eternity.common.util.BufUtil;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -10,6 +11,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Function;
 
 public interface IPacket<T extends IPacket<T>> extends CustomPacketPayload {
+
+    BufUtil util = new BufUtil();
 
     void toBytes(RegistryFriendlyByteBuf buf);
 

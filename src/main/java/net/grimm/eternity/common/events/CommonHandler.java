@@ -5,6 +5,7 @@ import net.grimm.eternity.common.astrodynamics.celestials.Celestial;
 import net.grimm.eternity.common.astrodynamics.celestials.Moon;
 import net.grimm.eternity.common.astrodynamics.celestials.Planet;
 import net.grimm.eternity.common.command.DebugCommand;
+import net.grimm.eternity.common.command.EpochControl;
 import net.grimm.eternity.common.network.packets.CelestialDataSync;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -36,5 +37,6 @@ public class CommonHandler {
     @SubscribeEvent
     public static void onCommandRegister(RegisterCommandsEvent event) {
         new DebugCommand(event.getDispatcher());
+        new EpochControl(event.getDispatcher());
     }
 }

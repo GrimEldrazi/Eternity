@@ -3,8 +3,6 @@ package net.grimm.eternity.common.network;
 import net.grimm.eternity.common.network.packets.CelestialDataSync;
 import net.grimm.eternity.common.network.packets.EpochSyncMessage;
 import net.grimm.eternity.common.network.packets.UpdateDebugPacket;
-import net.grimm.eternity.test.TestPacket;
-import net.grimm.eternity.test.TestVariable;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.neoforged.fml.LogicalSide;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -27,7 +25,6 @@ public class NetworkHandler {
         net.playToClient(CelestialDataSync::new);
         net.playToClient(EpochSyncMessage::new);
         net.playToClient(UpdateDebugPacket::new);
-        net.playToClient(TestPacket::new);
 
     }
 

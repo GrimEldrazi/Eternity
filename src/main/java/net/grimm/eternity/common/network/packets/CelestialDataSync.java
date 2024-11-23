@@ -2,7 +2,6 @@ package net.grimm.eternity.common.network.packets;
 
 import net.grimm.eternity.common.astrodynamics.celestials.Celestial;
 import net.grimm.eternity.common.network.IPacket;
-import net.grimm.eternity.common.util.BufHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -16,7 +15,7 @@ public class CelestialDataSync implements IPacket<CelestialDataSync> {
     }
 
     public CelestialDataSync(RegistryFriendlyByteBuf buf) {
-        this.tag = BufHelper.readNbt(buf);
+        this.tag = util.readNbt(buf);
     }
 
     @Override

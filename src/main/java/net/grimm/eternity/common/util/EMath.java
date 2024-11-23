@@ -1,12 +1,12 @@
 package net.grimm.eternity.common.util;
 
+import org.joml.Vector3d;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Function;
 
-public class EMath {
+public final class EMath {
 
     public static double newtonMethod(double initial, int iterations, Function<Double, Double> baseFunction, Function<Double, Double> firstDerivative) {
         double approxValue = initial;

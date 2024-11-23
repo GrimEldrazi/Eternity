@@ -2,7 +2,8 @@ package net.grimm.eternity.common.astrodynamics.celestials;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.grimm.eternity.common.astrodynamics.orbits.Orbit;
+import net.grimm.eternity.Eternity;
+import net.grimm.eternity.common.astrodynamics.orbits.OrbitTEST;
 import net.grimm.eternity.common.astrodynamics.orbits.OrbitFactory;
 import net.grimm.eternity.common.util.JsonManager;
 import net.minecraft.nbt.CompoundTag;
@@ -14,6 +15,7 @@ import java.util.List;
 public class Planet extends Celestial {
 
     public static final Codec<Planet> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            Codec.STRING.optionalFieldOf("namespace", Eternity.MOD_ID).forGetter(Planet::getNamespace),
             Codec.STRING.fieldOf("name").forGetter(Planet::getName),
             Codec.list(Codec.INT).fieldOf("colorID").forGetter(Planet::getRawColorID),
             Codec.DOUBLE.fieldOf("mass").forGetter(Planet::getMass),
@@ -26,8 +28,8 @@ public class Planet extends Celestial {
 
     private final boolean rings;
 
-    public Planet(String name, List<Integer> colorID, double mass, double radius, boolean rings, PlanetaryElements elements) {
-        super(name, colorID, mass, radius, elements, OrbitFactory.CENTRAL_STATIC_ORBIT_FACTORY);
+    public Planet(String namespace, String name, List<Integer> colorID, double mass, double radius, boolean rings, PlanetaryElements elements) {
+        super(namespace, name, colorID, mass, radius, elements, OrbitFactory.CENTRAL_STATIC_ORBIT_FACTORY);
         this.rings = rings;
     }
 
@@ -36,12 +38,13 @@ public class Planet extends Celestial {
     }
 
     @Override
-    public Orbit getOrbit() {
+    public OrbitTEST getOrbit() {
         return factory().createCentralStaticOrbit();
     }
 
     public CompoundTag encode() {
         CompoundTag tag = new CompoundTag();
+        tag.putString("namespace", getNamespace());
         tag.putString("name", getName());
         tag.putIntArray("color_id", getRawColorID());
         tag.putDouble("mass", getMass());
@@ -53,6 +56,7 @@ public class Planet extends Celestial {
 
     public static Planet decode(CompoundTag tag) {
         return new Planet(
+                tag.getString("namespace"),
                 tag.getString("name"),
                 new ArrayList<>(Arrays.asList(tag.getIntArray("color_id")[0], tag.getIntArray("color_id")[1], tag.getIntArray("color_id")[2])),
                 tag.getDouble("mass"),
